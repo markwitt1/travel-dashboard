@@ -1,0 +1,6 @@
+type TravelPlan @model @auth(rules: [{ allow: groups, groups: ["Admin"] }]) {
+  id: ID!
+  destination: String
+  exampleField: String
+  maxPrice: Int
+}
