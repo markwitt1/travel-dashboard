@@ -28,27 +28,7 @@ const ResetPassword = (props: Props) => {
       onSubmit={async (
         values: Values,
         formikHelpers: FormikHelpers<Values>
-      ) => {
-        try {
-          const user = await Auth.signIn(values.email, values.oldPassword);
-          if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
-            const res = await Auth.completeNewPassword(
-              user,
-              values.newPassword
-            );
-            if (res) setStatus({ error: false, message: "Success!" });
-          } else {
-            const res = await Auth.changePassword(
-              user,
-              values.oldPassword,
-              values.newPassword
-            );
-            if (res) setStatus({ error: false, message: "Success!" });
-          }
-        } catch (e) {
-          setStatus({ error: true, message: (e as any).message });
-        }
-      }}
+      ) => {}}
     >
       <Form>
         <Field name="email" component={TextField} label="Email Address" />

@@ -1,10 +1,6 @@
-import Amplify from "@aws-amplify/core";
-import { Resource } from "react-admin";
-import { AmplifyAdmin } from "react-admin-amplify";
-import * as mutations from "./graphql/mutations";
-import * as queries from "./graphql/queries";
-
-import awsconfig from "./aws-exports";
+import { Admin, Resource } from "react-admin";
+import { dataProvider } from "./dataProvider";
+import { authProvider } from "./authProvider";
 import {
   TravelPlanCreate,
   TravelPlanEdit,
@@ -12,19 +8,18 @@ import {
 } from "./travelPlans";
 import ResetPassword from "./ResetPassword";
 import { Route, Switch } from "react-router-dom";
-Amplify.configure(awsconfig);
 
 const App = () => (
   <Switch>
     <Route path="/resetPassword" exact component={ResetPassword} />
-    <AmplifyAdmin operations={{ queries, mutations }}>
+    <Admin dataProvider={dataProvider} authProvider={authProvider}>
       <Resource
         name="TravelPlans"
         list={TravelPlansList}
         create={TravelPlanCreate}
         edit={TravelPlanEdit}
       />
-    </AmplifyAdmin>
+    </Admin>
   </Switch>
 );
 
